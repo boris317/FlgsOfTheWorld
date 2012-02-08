@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= fill_title("FLGS of the World", yield(:title)) %></title>
+  <%= stylesheet_link_tag 'blueprint/screen.css', :media => 'screen' %>
+  <%= stylesheet_link_tag 'blueprint/print.css',  :media => 'print' %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

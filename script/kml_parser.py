@@ -78,7 +78,7 @@ if __name__ == "__main__":
         host = 'localhost'
     try:
         port = int(sys.argv[3])
-    except IndexError, TypeError, ValueError:
+    except (IndexError, TypeError, ValueError):
         port = 27017 
                         
     to_mongo_db(parse_kml(sys.argv[1]), "flgs-stores", collection="stores", host=host, port=port)

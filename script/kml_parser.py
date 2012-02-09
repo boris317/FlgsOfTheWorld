@@ -61,9 +61,9 @@ def parse_kml(filename):
         parser.parse(fp)
     return parser.places
 
-def to_mongo_db(places, db_name, collection="places"):
+def to_mongo_db(places, db_name, collection="places", host='localhost', port=2701):
     from pymongo import Connection, GEO2D
-    conn = Connection()
+    conn = Connection(host, port)
     db = conn[db_name]
     coll = db[collection]
 
@@ -72,5 +72,14 @@ def to_mongo_db(places, db_name, collection="places"):
 
 if __name__ == "__main__":
     import sys
-    to_mongo_db(parse_kml(sys.argv[1]), "flgs-stores", collection="stores")
+    try:
+        host = sys.argv[2]
+    except IndexError:
+        host = 'localhost'
+    try:
+        port = int(sys.argv[3])
+    except IndexError, TypeError, ValueError:
+        port = 27017 
+                        
+    to_mongo_db(parse_kml(sys.argv[1]), "flgs-stores", collection="stores", host=host, port=port)
     #parse_kml(sys.argv[1])    

@@ -49,9 +49,7 @@ FlgsOfTheWorld::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
 
-  match '/stores/near/place' => 'stores#near_place'
-  match '/stores/near/coord' => 'stores#near_coord'
-
+  match '/stores/find' => 'stores#near_place', :as => :find_stores
   root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"

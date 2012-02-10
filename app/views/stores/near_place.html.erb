@@ -1,0 +1,9 @@
+<% provide(:title, "Stores") %>
+<h3>Game stores near <%= @stores[:place][:name] %></h3>
+
+<ul>
+	<% @stores[:stores].each do |store| %>
+	 <li><%= store.name %></li>
+	<% end %>
+</ul>
+

@@ -1,9 +1,6 @@
 def error(error_code, error_message, error_info)
   {:error_code => error_code, :error_message => error_message, :error_info => error_info}
 end
-def json(stores)
-  {:count => stores.count, :stores => stores}
-end
 
 class StoresController < ApplicationController
   rescue_from ActiveForm::ValidationError, :with => :validation_error_handler
@@ -20,15 +17,26 @@ class StoresController < ApplicationController
   end
   
   def validation_error_handler(exc)
-    render :json => error("VALIDATION_ERROR", "", exc.errors)
+    @store = exc.form
+    respond_to do |format|
+      format.html { render :action => '/home#index' }
+      format.json { render :json => error("VALIDATION_ERROR", "", exc.form.errors) }
+    end
   end
   
   def near_place
-    @place = ActiveForm.validate(params, FindStoresNearPlaceForm)
-    render(:json => json(Store.find_near(@place.place_name, @place.distance)))
+    #render :json => params[:store]
+    Rails.logger.error(params.class.to_s)
+    @store = ActiveForm.validate(params[:store], FindStoresNearPlaceForm)
+    @stores = Store.find_near(@store.near, @store.within, unit=@store.unit.to_sym)
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @stores }
+    end
   end
   def near_coord
-    @place = ActiveForm.validate(params, FindStoresNearCoordForm)
-    render(:json => json(Store.find_near([@place.longitude, @place.latitude], @place.distance)))
+    @store = ActiveForm.validate(params[:store], FindStoresNearCoordForm)
+    render(:json => json(Store.find_near([@place.longitude, @place.latitude], @store.within, unit=@store.unit)))
   end
 end

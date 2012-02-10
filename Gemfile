@@ -14,14 +14,16 @@ gem 'therubyracer'
 group :development do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.8.1'
-  gem 'guard-rspec', '0.5.5'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'ruby-debug-base19', '0.11.26'
+  #gem 'guard-rspec', '0.5.5'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  #gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
@@ -31,8 +33,7 @@ end
 
 # Test gems on Macintosh OS X
 group :test do
-  gem 'rspec-rails', '2.8.1'
-  gem 'capybara', '1.1.2'
+  #gem 'capybara', '1.1.2'
     # System-dependent gems  
   gem 'rspec-rails', '2.8.1'
   gem 'rb-fsevent', '0.4.3.1', :require => false

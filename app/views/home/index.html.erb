@@ -1,2 +1,18 @@
-<% provide(:title, "") %>
-<p>Hello World!<p>
+<% provide(:title, 'Find a F.L.G.S') %>
+<h1>Find a game store</h1>
+
+<%= form_for(@store, url: find_stores_path) do |f| %>
+  <div class="field">
+	<%= label :store, :near, "Find near (ie Boston, a zip code, etc..)" %><br/>
+    <%= search_field :store, :near %><br/>
+	<%= label :store, :within, "within" %>
+	<%= select :store, :within, (5..30).step(5).map {|n| [n] * 2} %>
+	<%= label :store, :unit, "mi" %>
+	<%= radio_button :store, :unit, "mi", {:checked => true} %>
+	<%= label :store, :unit, "km" %>
+	<%= radio_button :store, :unit, "km" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "find" %>
+  </div>
+<% end %>

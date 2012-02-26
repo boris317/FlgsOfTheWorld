@@ -27,8 +27,8 @@ module ActiveForm
     end
     
     def self.form_attr_accessor(*attrs)
-      # This is probably a terrible solution =p. Using the ``@attributes`` variable
-      # as a container for our form's attributes leaves us in a bad state when the class
+      # Using the ``@attributes`` variable as a container for our 
+      # form's attributes leaves us in a bad state when the class
       # is initialized without any arguments. Here is an example:
       #
       #   class TestForm < ActiveForm::Base
@@ -37,9 +37,10 @@ module ActiveForm
       #   form = TestForm.new
       #   form.foo -> raises NoMethodError
       #
-      # Defining ``form_attr_accessor`` lets us use a familiar interface to solve this problem. 
-      # We can "save" the attribute symbols in a closure then retrieve them during object 
-      # initialization, setting them to nil if they were not passed in.
+      # Defining ``form_attr_accessor`` lets us use a familiar interface 
+      # to solve this problem. We can "save" the attribute symbols in a
+      # closure then retrieve them during object initialization, setting
+      # them to ``nil`` if they were not passed in.
       #
       #   class TestForm < ActiveForm::Base
       #     validates :foo, :bar, :presence => true
@@ -47,7 +48,7 @@ module ActiveForm
       #
       #   form = TestForm.new
       #   form.foo -> nil
-      #
+
       define_method("defaults_") do 
         (attrs ||= []).map {|a| a.to_sym}
       end

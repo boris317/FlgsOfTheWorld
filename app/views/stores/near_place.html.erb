@@ -3,7 +3,7 @@
 
 <ul>
 	<% @stores[:stores].each do |store| %>
-	 <li><%= store.name %></li>
+	 <li><%= store.name %> - <a href="<%= "http://maps.google.com/maps?&z=10&q=#{store.latitude},#{store.longitude}" %>">map</a></li>
 	<% end %>
 </ul>
 
